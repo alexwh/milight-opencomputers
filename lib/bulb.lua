@@ -47,6 +47,15 @@ function bulb.sendData(data)
 end
 
 function bulb.color(color)
+	color = tonumber(color)
+
+	if color == "" or color == nil then
+		return nil, "color requires an argument"
+	end
+	if color < 0 or color > 255 then
+		return nil, "color must be between 0 and 255"
+	end
+
 	bulb.sendData(commands.color .. string.char(color))
 end
 
