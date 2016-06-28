@@ -42,7 +42,6 @@ function bulb.sendData(data)
 
 	local con = net.open(bulb.address, bulb.port)
 	con:write(data)
-	con:flush()
 	con:close()
 end
 
