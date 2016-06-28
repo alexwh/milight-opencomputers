@@ -18,7 +18,7 @@ commands = {
 	bdown = string.char(0x24),
 }
 
-function bulb.sendData(data)
+function sendData(data)
 	if data == "" or data == nil then
 		return nil, "sendData requires an argument"
 	end
@@ -55,23 +55,23 @@ function bulb.color(color)
 		return nil, "color must be between 0 and 255"
 	end
 
-	bulb.sendData(commands.color .. string.char(color))
+	sendData(commands.color .. string.char(color))
 end
 
 function bulb.switchOff()
-	bulb.sendData(commands.off)
+	sendData(commands.off)
 end
 
 function bulb.switchOn()
-	bulb.sendData(commands.on)
+	sendData(commands.on)
 end
 
 function bulb.brightnessUp()
-	bulb.sendData(commands.bup)
+	sendData(commands.bup)
 end
 
 function bulb.brightnessDown()
-	bulb.sendData(commands.bdown)
+	sendData(commands.bdown)
 end
 
 
