@@ -1,4 +1,3 @@
-local red = require("component").redstone
 local net = require("internet")
 local event = require("event")
 local colors = require("colors")
@@ -9,6 +8,20 @@ local running = true
 
 bulb.address = "127.0.0.1" -- testing
 bulb.port = 8899
+
+bulb.colorMap = {
+orange = 148,
+magneta = 180,
+lightblue = 48,
+yellow = 125,
+lime = 113,
+pink = 185,
+cyan = 76,
+purple = 210,
+blue = 0,
+green = 90,
+red = 170
+}
 
 commands = {
 	color = string.char(0x20),
@@ -45,17 +58,29 @@ function sendData(data)
 	con:close()
 end
 
-function bulb.color(color)
+function bulb.colorNumber(color)
 	color = tonumber(color)
 
 	if color == "" or color == nil then
-		return nil, "color requires an argument"
+		return nil, "color requires a numerical argument"
 	end
 	if color < 0 or color > 255 then
 		return nil, "color must be between 0 and 255"
 	end
 
 	sendData(commands.color .. string.char(color))
+end
+
+function bulb.color(color)
+  if bulb.colorMap[color] == nil then
+   print("that is not a known color")
+   print("choose from: ")
+   for k, _ in pairs(bulb.colorMap) do
+     print(k)
+   end
+   return nil, "not a valid color"  
+  end
+  bulb.colorNumber(bulb.colorMap[color])
 end
 
 function bulb.switchOff()
@@ -75,14 +100,6 @@ function bulb.brightnessDown()
 end
 
 
--- have this as an excersise
--- function bulb.switch(value)
--- 	if value then
--- 	else
--- 	end
--- end
-
-
 function eventHandlers.key_up(address, char, code, playerName)
 	if (char == string.byte("q")) then
 		running = false
@@ -91,10 +108,6 @@ function eventHandlers.key_up(address, char, code, playerName)
 end
 
 function eventHandlers.redstone_changed(_, address, side)
-	for color, value in pairs(red.getBundledInput(2)) do
-		print(colors[color], value)
-	end
-
 	if side > 0 then
 		bulb.switchOn(value)
 	else
@@ -102,17 +115,24 @@ function eventHandlers.redstone_changed(_, address, side)
 	end
 end
 
---- ... expands to "soak up" a variable amount of extra arguments
-function handleEvent(eventID, ...)
-	local event = eventHandlers[eventID]
-
-	if event then
-		event(...)
-	end
+function eventHandlers.touch(address, x, y, button, playerName)
+	print(x, y, button, playerName)
 end
 
--- while running do
---   handleEvent(event.pull())
--- end
+function bulb.start()
+	--- ... expands to "soak up" a variable amount of extra arguments
+	running = true
+	function handleEvent(eventID, ...)
+		local event = eventHandlers[eventID]
+
+		if event then
+			event(...)
+		end
+	end
+
+	while running do
+		handleEvent(event.pull())
+	end
+end
 
 return bulb
