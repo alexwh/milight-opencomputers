@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-from socket import socket
+import socket
 from time import sleep
 
 # use tcp because opencomputers can't use udp sockets to my knowledge. the
 # controller can accept tcp or udp, but it's configured to use udp by default.
-sock = socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.connect('192.168.0.100', 8899)
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock.connect(('192.168.0.16', 8899))
 
 # color test
 for i in range(0xff):
