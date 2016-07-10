@@ -10,17 +10,17 @@ bulb.address = "127.0.0.1" -- testing
 bulb.port = 8899
 
 bulb.colorMap = {
-orange = 148,
-magneta = 180,
-lightblue = 48,
-yellow = 125,
-lime = 113,
-pink = 185,
-cyan = 76,
-purple = 210,
-blue = 0,
-green = 90,
-red = 170
+    orange = 148,
+    magneta = 180,
+    lightblue = 48,
+    yellow = 125,
+    lime = 113,
+    pink = 185,
+    cyan = 76,
+    purple = 210,
+    blue = 0,
+    green = 90,
+    red = 170
 }
 
 commands = {
@@ -72,15 +72,15 @@ function bulb.colorNumber(color)
 end
 
 function bulb.color(color)
-  if bulb.colorMap[color] == nil then
-   print("that is not a known color")
-   print("choose from: ")
-   for k, _ in pairs(bulb.colorMap) do
-     print(k)
-   end
-   return nil, "not a valid color"  
-  end
-  bulb.colorNumber(bulb.colorMap[color])
+    if bulb.colorMap[color] == nil then
+        print("that is not a known color")
+        print("choose from: ")
+        for k, _ in pairs(bulb.colorMap) do
+            print(k)
+        end
+        return nil, "not a valid color"
+    end
+    bulb.colorNumber(bulb.colorMap[color])
 end
 
 function bulb.switchOff()
