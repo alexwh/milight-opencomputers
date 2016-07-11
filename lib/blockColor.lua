@@ -40,8 +40,8 @@ end
 
 function blockColor.get(face)
   if not face then
-		face = side.forward
-	end
+    face = side.forward
+  end
     geoColor = geo.analyze(face)["color"]
 
     -- bitwise mask out rgb bits and divide to account for extra place value on
