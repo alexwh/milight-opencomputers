@@ -38,8 +38,11 @@ function rgbToHsv(r, g, b, a)
   return h, s, v, a
 end
 
-function blockColor.get()
-    geoColor = geo.analyze(side.forward)["color"]
+function blockColor.get(face)
+  if not face then
+		face = side.forward
+	end
+    geoColor = geo.analyze(face)["color"]
 
     -- bitwise mask out rgb bits and divide to account for extra place value on
     -- red and blue (4, and 2)
