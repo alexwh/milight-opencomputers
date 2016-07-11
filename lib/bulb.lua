@@ -115,10 +115,6 @@ function eventHandlers.redstone_changed(_, address, side)
     end
 end
 
-function eventHandlers.touch(address, x, y, button, playerName)
-    print(x, y, button, playerName)
-end
-
 function bulb.start()
     --- ... expands to "soak up" a variable amount of extra arguments
     running = true
