@@ -21,7 +21,7 @@ bulb.address = "192.168.x.x" -- Set the address of the Mi-Light bridge
 
 bulb.color("green") -- changes the color of the bulb to color name based on a colormap table
 
-color.get() -- gets the color of the block adjacent to the defined side (defualts to side.forward)
+color.get() -- gets the color of the block adjacent to the defined side (defaults to side.forward)
 -- also converts the decimal given by minecraft to it's corresponding number on the Mi-Light scale of 0-255
 
 bulb.colorNumber(color.get()) -- takes a 0-255 number instead of a string to set color, use with color.get()
