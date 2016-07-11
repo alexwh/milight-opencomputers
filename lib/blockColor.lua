@@ -50,16 +50,21 @@ end
 function blockColor.get()
     geoColor = retrieveColor(geo.analyze(side.forward))
 
-    -- bitwise mask out rgb bits and divide to account for extra place value on red and blue (4, and 2)
-    red, blue, green = bit32.band(geoColor, 0xff0000)/16^4, bit32.band(geoColor, 0x00ff00)/16^2, bit32.band(geoColor, 0x0000ff)
+    -- bitwise mask out rgb bits and divide to account for extra place value on
+    -- red and blue (4, and 2)
+    red   = bit32.band(geoColor, 0xff0000)/16^4
+    blue  = bit32.band(geoColor, 0x00ff00)/16^2
+    green = bit32.band(geoColor, 0x0000ff)
 
     h, s, v, _ = rgbToHsv(red, blue, green, 0) -- ignore alpha
     -- h, s, and v are between 0 and 1 from the function, normalize them to their normal values
-    h, s, v = math.floor((h*360)+0.5), math.floor((s*100)+0.5), math.floor((v*100)+0.5)
+    h = math.floor((h*360)+0.5)
+    s = math.floor((s*100)+0.5)
+    v = math.floor((v*100)+0.5)
 
     -- shift the h (hue) to match about what the milight spectrum is (0-255 and add 176)
     -- values from https://git.io/vKnxe
-    color = (256 + 176 - math.floor(h / 360.0 * 255.0)) % 256
+    color = (256 + 176 - math.floor(h / 360 * 255)) % 256
     return color
 end
 
