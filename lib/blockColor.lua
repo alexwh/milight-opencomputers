@@ -1,3 +1,4 @@
+side = require("sides")
 geo = require("component").geolyzer
 local blockColor = {}
 
@@ -46,8 +47,8 @@ function retrieveColor(analyze)
   end
 end
 
-function blockColor.get(side)
-    geoColor = retrieveColor(geo.analyze(side))
+function blockColor.get()
+    geoColor = retrieveColor(geo.analyze(side.forward))
 
     -- bitwise mask out rgb bits and divide to account for extra place value on red and blue (4, and 2)
     red, blue, green = bit32.band(geoColor, 0xff0000)/16^4, bit32.band(geoColor, 0x00ff00)/16^2, bit32.band(geoColor, 0x0000ff)
