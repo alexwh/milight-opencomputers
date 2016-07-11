@@ -38,17 +38,8 @@ function rgbToHsv(r, g, b, a)
   return h, s, v, a
 end
 
--- the geolyzer returns a table containing a "color" element
-function retrieveColor(analyze)
-  for k, v in pairs(analyze) do
-    if k == "color" then
-      return v
-    end
-  end
-end
-
 function blockColor.get()
-    geoColor = retrieveColor(geo.analyze(side.forward))
+    geoColor = geo.analyze(side.forward)["color"]
 
     -- bitwise mask out rgb bits and divide to account for extra place value on
     -- red and blue (4, and 2)
