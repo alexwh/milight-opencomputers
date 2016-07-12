@@ -43,6 +43,9 @@ bulb.color("green")
 -- use a specific numerical value between 0-255
 bulb.colorNumber(100)
 
+-- get the block name
+block.get()
+
 -- gets the color of the block on the defined side (defaults to side.forward).
 -- also converts the decimal given by minecraft to it's corresponding number on
 -- the Mi-Light scale of 0-255
