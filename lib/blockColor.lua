@@ -40,7 +40,10 @@ end
 
 function blockColor.rgbToByte(rgb)
     -- this function takes an int and returns the milight shifted result as a
-    -- single byte. example: rgbToByte(0xff00ff) -> 220, a purplish color
+    -- single byte. this operation will inherently lose data, since we're
+    -- converting three bytes to one. colors like black also cannot be represented
+    -- by the bulb.
+    -- example: rgbToByte(0xff00ff) -> 220
 
     -- bitwise mask out rgb bits and divide to account for extra place value on
     -- red and blue (4, and 2)
@@ -50,13 +53,14 @@ function blockColor.rgbToByte(rgb)
 
     h, s, v, _ = rgbToHsv(red, blue, green, 0) -- ignore alpha
     -- rgbToHsv returns the hsv result between 0 and 1, we need their normal values
-    h = math.floor((h*360)+0.5) -- hue between 0 and 360
-    s = math.floor((s*100)+0.5) -- sat between 0 and 100
-    v = math.floor((v*100)+0.5) -- val between 0 and 100
+    -- (though we only use the hue value)
+    h = h * 360 -- hue between 0 and 360
+    s = s * 100 -- sat between 0 and 100
+    v = v * 100 -- val between 0 and 100
 
     -- shift the h (hue) to match about what the milight spectrum is (0-255 and add 176)
     -- values from https://git.io/vKnxe
-    color = (256 + 176 - math.floor(h / 360 * 255)) % 256
+    color = math.floor((256 + 176 - (h / 360 * 255)) % 256)
     return color
 end
 
