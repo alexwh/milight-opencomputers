@@ -38,28 +38,35 @@ function rgbToHsv(r, g, b, a)
   return h, s, v, a
 end
 
+function blockColor.rgbToByte(rgb)
+    -- this function takes an int and returns the milight shifted result as a
+    -- single byte. example: rgbToByte(0xff00ff) -> 220, a purplish color
+
+    -- bitwise mask out rgb bits and divide to account for extra place value on
+    -- red and blue (4, and 2)
+    red   = bit32.band(rgb, 0xff0000)/16^4
+    blue  = bit32.band(rgb, 0x00ff00)/16^2
+    green = bit32.band(rgb, 0x0000ff)
+
+    h, s, v, _ = rgbToHsv(red, blue, green, 0) -- ignore alpha
+    -- rgbToHsv returns the hsv result between 0 and 1, we need their normal values
+    h = math.floor((h*360)+0.5) -- hue between 0 and 360
+    s = math.floor((s*100)+0.5) -- sat between 0 and 100
+    v = math.floor((v*100)+0.5) -- val between 0 and 100
+
+    -- shift the h (hue) to match about what the milight spectrum is (0-255 and add 176)
+    -- values from https://git.io/vKnxe
+    color = (256 + 176 - math.floor(h / 360 * 255)) % 256
+    return color
+end
+
 function blockColor.get(face)
     if not face then
       face = side.forward
     end
     geoColor = geo.analyze(face)["color"]
 
-    -- bitwise mask out rgb bits and divide to account for extra place value on
-    -- red and blue (4, and 2)
-    red   = bit32.band(geoColor, 0xff0000)/16^4
-    blue  = bit32.band(geoColor, 0x00ff00)/16^2
-    green = bit32.band(geoColor, 0x0000ff)
-
-    h, s, v, _ = rgbToHsv(red, blue, green, 0) -- ignore alpha
-    -- h, s, and v are between 0 and 1 from the function, normalize them to their normal values
-    h = math.floor((h*360)+0.5)
-    s = math.floor((s*100)+0.5)
-    v = math.floor((v*100)+0.5)
-
-    -- shift the h (hue) to match about what the milight spectrum is (0-255 and add 176)
-    -- values from https://git.io/vKnxe
-    color = (256 + 176 - math.floor(h / 360 * 255)) % 256
-    return color
+    return blockColor.rgbToByte(geoColor)
 end
 
 return blockColor
