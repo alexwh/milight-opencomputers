@@ -68,6 +68,7 @@ function bulb.colorNumber(color)
         return nil, "color must be between 0 and 255"
     end
 
+    bulb.switchOn()
     sendData(commands.color .. string.char(color))
 end
 
@@ -126,6 +127,7 @@ function bulb.start()
         end
     end
 
+    print("Press q to quit")
     while running do
         handleEvent(event.pull())
     end
