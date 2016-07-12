@@ -10,7 +10,9 @@ It includes modules for sending commands to the Mi-Light bulb and for using the 
 
 #Installation
 Your computer needs an internet card with its module installed.
+
 `wget https://raw.githubusercontent.com/alexwh/milight-opencomputers/master/lib/bulb.lua /lib/bulb.lua`
+
 Or, just copy the appropriate module files in the lib folder to your systems /lib folder.
 
 
