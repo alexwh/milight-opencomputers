@@ -68,6 +68,14 @@ function blockColor.get(face)
     if not face then
       face = side.forward
     end
+
+    return geo.analyze(face)["name"]
+end
+
+function blockColor.getColor(face)
+    if not face then
+      face = side.forward
+    end
     geoColor = geo.analyze(face)["color"]
 
     return blockColor.rgbToByte(geoColor)
