@@ -19,20 +19,31 @@ Or, just copy the appropriate module files in the lib folder to your systems /li
 #Basic Usage
 Here is a basic example of how the module works:
 ```.lua
-side = require("sides") -- OpenComputers module for selecting which face of a block to calculate commands from e.g robot.detect()
--- options are (.front, .back, .left, .right, .top, .bottom)
+-- OpenComputers module for selecting which face of a block to calculate
+-- commands from e.g robot.detect()
+side = require("sides")
+
+-- module for interfacing with Mi-Light bulb
 bulb = require("bulb")
-blockColor = require("blockColor")
+
+-- module for detecting block characteristics with the geolyzer
+block = require("block")
 
 bulb.address = "192.168.x.x" -- Set the address of the Mi-Light bridge
 
-bulb.color("green") -- changes the color of the bulb to color name based on a colormap table
-bulb.colorNumber(100) -- use a specific numerical value between 0-255
+-- changes the color of the bulb to color name based on a colormap table
+bulb.color("green")
 
-blockColor.get() -- gets the color of the block adjacent to the defined side (defaults to side.forward)
--- also converts the decimal given by minecraft to it's corresponding number on the Mi-Light scale of 0-255
+-- use a specific numerical value between 0-255
+bulb.colorNumber(100)
 
-bulb.colorNumber(blockColor.get()) -- takes a 0-255 number instead of a string to set color, use with blockColor.get()
+-- gets the color of the block on the defined side (defaults to side.forward).
+-- also converts the decimal given by minecraft to it's corresponding number on
+-- the Mi-Light scale of 0-255
+block.getColor()
+
+-- combine the two to set the light color to the detected block color
+bulb.colorNumber(block.getColor())
 ```
 
 # Notes
