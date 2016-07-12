@@ -44,12 +44,12 @@ bulb.color("green")
 bulb.colorNumber(100)
 
 -- get the block name
-block.get()
+block.get() -- -> e.g. "minecraft:air"
 
 -- gets the color of the block on the defined side (defaults to side.forward).
 -- also converts the decimal given by minecraft to it's corresponding number on
 -- the Mi-Light scale of 0-255
-block.getColor()
+block.getColor() -- -> e.g. 120
 
 -- combine the two to set the light color to the detected block color
 bulb.colorNumber(block.getColor())
