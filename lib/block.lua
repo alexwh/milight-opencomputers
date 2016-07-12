@@ -1,6 +1,6 @@
 side = require("sides")
 geo = require("component").geolyzer
-local blockColor = {}
+local block = {}
 
 -- rgbToHsv function from https://github.com/EmmanuelOga/columns/blob/master/utils/color.lua
 --[[
@@ -38,7 +38,7 @@ function rgbToHsv(r, g, b, a)
   return h, s, v, a
 end
 
-function blockColor.rgbToByte(rgb)
+function block.rgbToByte(rgb)
     -- this function takes an int and returns the milight shifted result as a
     -- single byte. this operation will inherently lose data, since we're
     -- converting three bytes to one. colors like black also cannot be represented
@@ -64,7 +64,7 @@ function blockColor.rgbToByte(rgb)
     return color
 end
 
-function blockColor.get(face)
+function block.get(face)
     if not face then
       face = side.forward
     end
@@ -72,13 +72,13 @@ function blockColor.get(face)
     return geo.analyze(face)["name"]
 end
 
-function blockColor.getColor(face)
+function block.getColor(face)
     if not face then
       face = side.forward
     end
     geoColor = geo.analyze(face)["color"]
 
-    return blockColor.rgbToByte(geoColor)
+    return block.rgbToByte(geoColor)
 end
 
-return blockColor
+return block
