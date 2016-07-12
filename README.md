@@ -1,19 +1,25 @@
 # milight-opencomputers
-An OpenComputers lua module for controlling Mi-Light brand bulbs (and LimitlessLED, etc)
+An OpenComputers lua module for controlling Mi-Light brand bulbs (and
+LimitlessLED, etc)
 
 #Info
 ---
-It includes modules for sending commands to the Mi-Light bulb and for using the robots from the Minecraft OpenComputers mod to detect color from adjacent blocks and relay to the bulb.
+---
+It includes modules for sending commands to the Mi-Light bulb and for using the
+robots from the Minecraft OpenComputers mod to detect color from adjacent
+blocks and relay to the bulb.
 
 
 [OpenComputers Documentation](http://ocdoc.cil.li/)
 
 #Installation
-Your OpenComputers Robot/Drone/Computer needs an internet card with its module installed.
+Your OpenComputers Robot/Drone/Computer needs an internet card with its module
+installed.
 
 `wget https://raw.githubusercontent.com/alexwh/milight-opencomputers/master/lib/bulb.lua /lib/bulb.lua`
 
-Or, just copy the appropriate module files in the lib folder to your systems /lib folder.
+Or, just copy the appropriate module files in the lib folder to your systems
+/lib folder.
 
 
 #Basic Usage
@@ -47,4 +53,7 @@ bulb.colorNumber(block.getColor())
 ```
 
 # Notes
-* After syncing the bulb to the controller with the phone app, you must change the transmission mode to TCP-Server in the controller webui settings (browse to the IP, credentials are admin/admin). Be aware that the phone app only works with UDP, and OpenComputers only works with TCP.
+* After syncing the bulb to the controller with the phone app, you must change
+the transmission mode to TCP-Server in the controller webui settings (browse to
+the IP, credentials are admin/admin). Be aware that the phone app only works
+with UDP, and OpenComputers only works with TCP.
