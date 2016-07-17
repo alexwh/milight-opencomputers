@@ -17,6 +17,7 @@ Your OpenComputers Robot/Drone/Computer needs an internet card with its module
 installed.
 
 `wget https://raw.githubusercontent.com/alexwh/milight-opencomputers/master/lib/bulb.lua /lib/bulb.lua`
+`wget https://raw.githubusercontent.com/alexwh/milight-opencomputers/master/lib/block.lua /lib/block.lua`
 
 Or, just copy the appropriate module files in the lib folder to your systems
 /lib folder.
