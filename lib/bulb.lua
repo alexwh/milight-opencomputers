@@ -23,12 +23,20 @@ bulb.colorMap = {
     red = 170
 }
 
+-- commands = {
+--     color = string.char(0x20),
+--     off   = string.char(0x21),
+--     on    = string.char(0x22),
+--     bup   = string.char(0x23),
+--     bdown = string.char(0x24),
+-- }
+
 commands = {
-    color = string.char(0x20),
-    off   = string.char(0x21),
-    on    = string.char(0x22),
-    bup   = string.char(0x23),
-    bdown = string.char(0x24),
+    color = string.char(0x40),
+    off   = string.char(0x41),
+    on    = string.char(0x42),
+    bup   = string.char(0x43),
+    bdown = string.char(0x44),
 }
 
 function sendData(data)

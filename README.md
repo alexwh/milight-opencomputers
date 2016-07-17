@@ -58,6 +58,10 @@ bulb.colorNumber(block.getColor())
 
 # Notes
 * After syncing the bulb to the controller with the phone app, you must change
-the transmission mode to TCP-Server in the controller webui settings (browse to
-the IP, credentials are admin/admin). Be aware that the phone app only works
-with UDP, and OpenComputers only works with TCP.
+  the transmission mode to TCP-Server in the controller webui settings (browse
+  to the IP, credentials are admin/admin). Be aware that the phone app only
+  works with UDP, and OpenComputers only works with TCP.
+* Some Mi-Light bridges seem to have different command prefixes. The most
+  common seems to be with 0x4. Because of this, 0x4 is the default. Originally,
+  the bulb that was tested with this used 0x2 instead. A copy of 0x2 commands
+  have been included, commented out.
